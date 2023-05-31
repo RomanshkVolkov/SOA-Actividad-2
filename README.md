@@ -1,7 +1,7 @@
 - [Repositorio API .NET](https://github.com/RomanshkVolkov/SOA-Actividad-2-API)
 
 
-##Equipo
+# Equipo
 
 - [Jose Guzman](https://github.com/RomanshkVolkov/)
 - [Alberto Garcia](https://github.com/AlbertoGR5)
