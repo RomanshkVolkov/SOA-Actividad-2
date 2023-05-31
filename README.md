@@ -3,10 +3,10 @@
 
 ##Equipo
 
-- Jose Guzman
-- Alberto Garcia
-- Eduardo Leal
-- Mario Lara
+- [Jose Guzman](https://github.com/RomanshkVolkov/)
+- [Alberto Garcia](https://github.com/AlbertoGR5)
+- [Eduardo Leal](https://github.com/azulcolor)
+- [Mario Lara](https://github.com/MLara8061)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with 
 [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
