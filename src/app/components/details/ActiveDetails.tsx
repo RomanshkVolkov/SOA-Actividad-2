@@ -6,7 +6,6 @@ import ItemOptions from '../Inputs/ItemOptions';
 import ItemCheck from '../Inputs/ItemCheck';
 import employee from '@/api/employee';
 import ItemDate from '../Inputs/ItemDate';
-import active from '@/api/active';
 
 interface Props {
    onEditValue: (value: any, attribute: string) => void;

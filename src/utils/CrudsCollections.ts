@@ -23,7 +23,7 @@ const collections: ICollections = {
       createItem: async (data: any) => await employee.createEmployee(data),
       updateItem: async (data: any) => await employee.updateEmployee(data),
       deleteItem: async (id: number) => await employee.deleteEmployee(id),
-      validate: (data: any) => data.Nombre && data.Apellidos
+      validate: (data: any) => data.Nombre && data.Apellidos && data['Fecha de nacimiento'] && data.Correo && data.CURP && data.Estado
    },
    actives: {
       collectionName: 'actives',
@@ -32,7 +32,8 @@ const collections: ICollections = {
       createItem: async (data: any) => await active.createActive(data),
       updateItem: async (data: any) => await active.updateActive(data),
       deleteItem: async (id: number) => {},
-      validate: (data: any) => data.Nombre && data['Descripción']
+      validate: (data: any) => data.Nombre && data['Descripción'] && (data.IsAsignable ? data.employeeId && data.assignmentDate && data.deadline : true)
+
    },
 };
 

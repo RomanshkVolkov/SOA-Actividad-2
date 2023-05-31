@@ -19,16 +19,22 @@ export default function Modal(props: Props) {
       setSelectedItem(item);
    }, [showModal]);
 
+   const validateItem = crudsCollections[collectionName].validate;
+
    const handleCreate = async () => {
-      const close = await crudsCollections[collectionName]?.createItem(selectedItem);
-      if (close) setShowModal(false);
-      window.location.reload();
+      if (validateItem(selectedItem)) {
+         const close = await crudsCollections[collectionName]?.createItem(selectedItem);
+         if (close) setShowModal(false);
+         window.location.reload();
+      }
    };
 
    const handleUpdate = async () => {
-      const close = await crudsCollections[collectionName].updateItem(selectedItem);
-      if (close) setShowModal(false);
-      window.location.reload();
+      if (validateItem(selectedItem)) {
+         const close = await crudsCollections[collectionName].updateItem(selectedItem);
+         if (close) setShowModal(false);
+         window.location.reload();
+      }
    };
 
    const handleOnUpdateValue = (value: any, attribute: string) => {
