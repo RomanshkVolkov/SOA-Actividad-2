@@ -13,6 +13,7 @@ interface Props {
 export default function ItemOptions(props: Props) {
    const { label, selected, options, attribute, onEditValue, disabled = false } = props;
    console.log(selected);
+   console.log(options);
    return (
       <React.Fragment>
          <div className="flex justify-between w-full">

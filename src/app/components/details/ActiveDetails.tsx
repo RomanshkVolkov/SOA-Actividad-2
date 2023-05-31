@@ -6,6 +6,7 @@ import ItemOptions from '../Inputs/ItemOptions';
 import ItemCheck from '../Inputs/ItemCheck';
 import employee from '@/api/employee';
 import ItemDate from '../Inputs/ItemDate';
+import active from '@/api/active';
 
 interface Props {
    onEditValue: (value: any, attribute: string) => void;
@@ -23,7 +24,7 @@ export default function ActiveDetails(props: Props) {
       (async () => {
          setEmployees(await employee.getEmployeesActives());
          onEditValue(item.Estado === 'Disponible' ? true : false, 'IsAsignable');
-         setActivesEmployes(await employee.getEmployeesActives());
+         setActivesEmployes(await employee.getEmployesByActive());
          console.log(activesEmployes);
       })();
    }, []);
@@ -77,7 +78,7 @@ export default function ActiveDetails(props: Props) {
                      <ItemCheck
                         label="Asignar"
                         attribute="IsAsignable"
-                        item={item}
+                        value={item['IsAsignable']}
                         onEditValue={onEditValue}
                         disabled={item.Estado === 'Disponible' ? false : true}
                      />

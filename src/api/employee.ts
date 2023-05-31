@@ -10,6 +10,12 @@ const employee = {
 
    getEmployeesActives: async () =>
       await axios
+         .get(`${urls.BASE_URL}/empleados/activos`)
+         .then((res) => res.data)
+         .catch((err) => console.log(err)),
+
+   getEmployesByActive: async () =>
+      await axios
          .get(`${urls.BASE_URL}/activos/empleados`)
          .then((res) => res.data)
          .catch((err) => console.log(err)),
@@ -39,6 +45,7 @@ const employee = {
             birthdate: data['Fecha de nacimiento'],
             numEmployee: data['No. Empleado'],
             email: data.Correo,
+            status: data.Estado === 'Activo' || data.Estado === true ? true : false,
          })
          .then((res) => res.data)
          .catch((err) => console.log(err)),

@@ -66,7 +66,7 @@ export default function EmployeeDetails(props: Props) {
                <div className="mt-3" />
                <ItemCheck
                   label="Activo"
-                  item={item}
+                  value={item.Estado === 'Activo' || item.Estado === true ? true : false}
                   onEditValue={onEditValue}
                   attribute="Estado"
                />
