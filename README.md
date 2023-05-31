@@ -1,5 +1,13 @@
 - [Repositorio API .NET](https://github.com/RomanshkVolkov/SOA-Actividad-2-API)
 
+
+##Equipo
+
+- Jose Guzman
+- Alberto Garcia
+- Eduardo Leal
+- Mario Lara
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with 
 [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
