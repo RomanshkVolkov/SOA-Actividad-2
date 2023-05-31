@@ -3,7 +3,7 @@
 
 # Equipo
 
-- [Jose Guzman](https://github.com/RomanshkVolkov/)
+- [Jose Guzman](https://github.com/RomanshkVolkov/) 
 - [Alberto Garcia](https://github.com/AlbertoGR5)
 - [Eduardo Leal](https://github.com/azulcolor)
 - [Mario Lara](https://github.com/MLara8061)
