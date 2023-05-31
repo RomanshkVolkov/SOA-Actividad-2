@@ -5,13 +5,13 @@ interface Props {
    label: string;
    selected: any;
    attribute: string;
-   value: string;
    options: any[];
    onEditValue: (value: any, attribute: string) => void;
+   disabled?: boolean;
 }
 
 export default function ItemOptions(props: Props) {
-   const { label, selected, options, attribute, value, onEditValue } = props;
+   const { label, selected, options, attribute, onEditValue, disabled = false } = props;
    console.log(selected);
    return (
       <React.Fragment>
@@ -19,8 +19,10 @@ export default function ItemOptions(props: Props) {
             <label htmlFor={`${attribute}-input-select`}>{label}:&nbsp;</label>
             <select
                id={`${attribute}-input-select`}
-               className="text-black p-1 rounded-md w-60">
-               <option value="0">Asignar</option>
+               className="text-black p-1 rounded-md w-60"
+               onChange={(e) => onEditValue(Number(e.target.value), attribute)}
+               disabled={disabled}>
+               <option value={selected?.id ?? '0'}>{selected?.label ?? 'Asignar'}</option>
                {options.map((option) => (
                   <option key={option.id} value={option.id}>
                      {option.label}

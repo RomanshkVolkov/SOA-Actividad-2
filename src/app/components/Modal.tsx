@@ -1,46 +1,54 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useEffect, useState } from 'react';
-import DetailsSelector from './details.tsx/DetailsSelector';
+import DetailsSelector from './details/DetailsSelector';
 import crudsCollections from '@/utils/CrudsCollections';
 
 interface Props {
-   collectionName: any;
-   options?: any[];
-   labelButton: string;
+   collectionName: string;
+   labelButton: 'Editar' | 'Crear';
    item: any;
 }
 export default function Modal(props: Props) {
-   const { collectionName, options = [], labelButton, item } = props;
+   const { collectionName, labelButton, item } = props;
    const [showModal, setShowModal] = useState(false);
    const [selectedItem, setSelectedItem] = useState(item);
-   const [collection, setCollection] = useState(crudsCollections[collectionName]);
 
    useEffect(() => {
-      if (!collectionName) return;
-      setCollection(crudsCollections[collectionName]);
-      console.log(collection);
-   }, [collectionName]);
+      setSelectedItem(item);
+   }, [showModal]);
 
-   console.log(options);
+   const handleCreate = async () => {
+      const close = await crudsCollections[collectionName]?.createItem(selectedItem);
+      if (close) setShowModal(false);
+      window.location.reload();
+   };
+
+   const handleUpdate = async () => {
+      const close = await crudsCollections[collectionName].updateItem(selectedItem);
+      if (close) setShowModal(false);
+      window.location.reload();
+   };
 
    const handleOnUpdateValue = (value: any, attribute: string) => {
       setSelectedItem({ ...selectedItem, [attribute]: value });
    };
+
    return (
       <div className="flex justify-center">
          {showModal && (
             <div
-               className="fixed top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2 p-20 rounded-lg"
+               className="fixed top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2 py-12 px-12 rounded-lg"
                style={{ backgroundColor: '#4B515D' }}>
                <DetailsSelector
-                  select={collection.detailsComponent}
-                  options={options}
+                  func={labelButton}
+                  select={crudsCollections[collectionName]?.detailsComponent}
                   onEditValue={handleOnUpdateValue}
                   item={selectedItem}
                />
 
-               <div className="flex justify-center mt-5 w-full">
+               <div className="flex justify-center mt-1 w-full">
                   <button
                      className="mt-5 w-full bg-gray-500 rounded-md p-2 mr-4"
                      onClick={() => setShowModal(false)}>
@@ -49,7 +57,10 @@ export default function Modal(props: Props) {
 
                   <button
                      className="mt-5 w-full bg-gray-500 rounded-md p-2"
-                     onClick={() => setShowModal(false)}>
+                     onClick={() => {
+                        if (labelButton === 'Editar') handleUpdate();
+                        else handleCreate();
+                     }}>
                      Guardar
                   </button>
                </div>

@@ -24,7 +24,6 @@ export default async function Employes({
                   item={employee}
                />
             ),
-            _: <button>Eliminar</button>,
          };
       }) || [];
    return (
@@ -36,7 +35,11 @@ export default async function Employes({
 
          {data?.length > 0 ? (
             <div className="mt-3">
-               <Table theads={data ? data[0] : {}} tbody={data as any} />
+               <Table
+                  theads={data ? data[0] : {}}
+                  tbody={data as any}
+                  collectionName="employees"
+               />
             </div>
          ) : (
             <h1 className="w-full text-center mt-10">No hay datos</h1>
