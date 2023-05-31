@@ -24,8 +24,8 @@ export default async function Actives() {
       }) || [];
 
    return (
-      <div style={{fontSize: 32}}>
-         <h1 className="text-3xl text-center mb-5">Bienvenido a la pagina de activos</h1>
+      <div className="mt-3 border-gray-300 d-flex justify-center w-full">
+         <h1 style={{fontSize: 32}}>Bienvenido a la pagina de activos</h1>
          <Modal collectionName={collectionName} labelButton="Crear" item={{}} />
 
          {data?.length > 0 ? (
