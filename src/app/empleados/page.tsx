@@ -27,8 +27,8 @@ export default async function Employes({
          };
       }) || [];
    return (
-      <div className="mt-5 border-gray-300 d-flex justify-center w-full">
-         <h1 className="text-3xl text-center mb-3">
+      <div>
+         <h1 style={{fontSize: 32}}>
             Bienvenido a la pagina de empleados
          </h1>
          <Modal collectionName={collectionName} labelButton="Crear" item={{}} />

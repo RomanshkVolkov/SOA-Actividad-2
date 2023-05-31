@@ -1,0 +1,9 @@
+.button {
+    background-color: "#33658A";
+    padding: "1vh 4vw"; 
+    text-align: "center";
+    margin-right: "1vw";
+    border-radius: "8px";
+    margin-top: "3vh"; 
+    color: "#FDFDFD"
+}

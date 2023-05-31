@@ -1,5 +1,5 @@
 import Link from 'next/link';
 
 export default function Home() {
-   return <div className="mt-5"></div>;
+   return <div></div>;
 }
