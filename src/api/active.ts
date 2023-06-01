@@ -14,22 +14,18 @@ const active = {
          status: data.Estado || true,
       }),
    updateActive: async (data: any) =>
-      {
-         await axios
+      await axios
          .patch(`${urls.BASE_URL}/activos`, {
             id: data['No. Activo'],
             name: data.Nombre,
             description: data['Descripción'],
-            employeeId: data.employeeId,
-            assignmentDate: data.assignmentDate,
-            deadLine: data.deadLine,
-            releaseDate: data.releaseDate,
+            employeeId: data?.employeeId || null,
+            assignmentDate: data?.assignmentDate || null,
+            deadLine: data?.deadLine || null,
+            releaseDate: data?.releaseDate || null,
          })
          .then((res) => res.data)
-         .catch((err) => console.log(err))
-      }
-
-      
+         .catch((err) => console.log(err)),
 };
 
 export default active;
