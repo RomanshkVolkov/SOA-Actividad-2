@@ -14,7 +14,8 @@ const active = {
          status: data.Estado || true,
       }),
    updateActive: async (data: any) =>
-      await axios
+      {
+         await axios
          .patch(`${urls.BASE_URL}/activos`, {
             id: data['No. Activo'],
             name: data.Nombre,
@@ -25,7 +26,10 @@ const active = {
             releaseDate: data.releaseDate,
          })
          .then((res) => res.data)
-         .catch((err) => console.log(err)),
+         .catch((err) => console.log(err))
+      }
+
+      
 };
 
 export default active;

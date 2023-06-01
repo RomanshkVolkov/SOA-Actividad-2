@@ -22,7 +22,7 @@ export default function ActiveDetails(props: Props) {
    useEffect(() => {
       (async () => {
          setEmployees(await employee.getEmployeesActives());
-         onEditValue(item.Estado === 'Disponible' ? true : false, 'IsAsignable');
+         onEditValue(false, 'IsAsignable');
          setActivesEmployes(await employee.getEmployesByActive());
          console.log(activesEmployes);
       })();
