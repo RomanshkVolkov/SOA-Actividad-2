@@ -1,5 +1,9 @@
 - [Repositorio API .NET](https://github.com/RomanshkVolkov/SOA-Actividad-2-API)
 
+# Detalles de la solucion.
+- [Aplicacion web NEXTJS (host vercel).](https://soa-actividad-2.vercel.app/empleados)
+- [Aplicacion Backend con conexion a la base de datos .NET 6 (APP SERVICE AZURE).](https://apisoa.azurewebsites.net/empleados)
+- Base de datos (HOST Servidor externo).
 
 # Equipo
 
