@@ -1,5 +1,5 @@
 const URLS = {
-   BASE_URL: 'https://st3mvw34-7027.use.devtunnels.ms',
+   BASE_URL: 'https://apisoa.azurewebsites.net/',
 };
 
 export default URLS;
