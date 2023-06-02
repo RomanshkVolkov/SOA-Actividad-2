@@ -8,6 +8,8 @@
 # Diagrama de base de datos.
 ![Diagrama DB.](https://github.com/RomanshkVolkov/SOA-Actividad-2/assets/85083888/67eadc1e-21cc-4de8-be8e-45c71c74c770)
 
+# Diagrama de arquitectura
+![DiagramArqutecture](https://github.com/RomanshkVolkov/SOA-Actividad-2/assets/85083888/d7fd58ad-8d50-493d-82b0-557172ed4de8)
 
 
 # Equipo
