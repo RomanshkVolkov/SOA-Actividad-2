@@ -26,6 +26,11 @@ const active = {
          })
          .then((res) => res.data)
          .catch((err) => console.log(err)),
+   deleteActive: async (id: number) =>
+      await axios
+         .delete(`${urls.BASE_URL}/activos?id=${id}`)
+         .then((res) => res.data)
+         .catch((err) => console.log(err)),
 };
 
 export default active;

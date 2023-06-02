@@ -35,7 +35,7 @@ export const Table = (props: Props) => {
               ))}
               <td>
                 <button
-                  onClick={() => handleDelete(row.id)}
+                  onClick={() => handleDelete(row[Object.keys(row)[0]] as any)}
                   style={{
                     backgroundColor: "#EA2529",
                     padding: "1vh 4vw",

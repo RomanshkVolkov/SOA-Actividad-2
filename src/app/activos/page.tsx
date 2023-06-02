@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import crudsCollections from '@/utils/CrudsCollections';
 import Modal from '../components/Modal';
 import { Table } from '../components/Table';
@@ -9,23 +9,31 @@ const collection = crudsCollections[collectionName];
 const fetchActives = async () => await collection.getItems();
 
 export default async function Actives() {
-   const data =
-      (await fetchActives())?.map((active: any) => {
-         return {
-            ...active,
-            '': (
-               <Modal
-                  collectionName={collectionName}
-                  labelButton="Editar"
-                  item={active}
-               />
-            ),
-         };
-      }) || [];
+   const [data, setData] = useState<any[]>([]);
+
+   useEffect(() => {
+      (async () => {
+         const data = (await fetchActives()) || [];
+         setData(
+            data?.map((active: any) => {
+               return {
+                  ...active,
+                  '': (
+                     <Modal
+                        collectionName={collectionName}
+                        labelButton="Editar"
+                        item={active}
+                     />
+                  ),
+               };
+            })
+         );
+      })();
+   }, []);
 
    return (
       <div className="mt-3 border-gray-300 d-flex justify-center w-full">
-         <h1 style={{fontSize: 32}}>Bienvenido a la pagina de activos</h1>
+         <h1 style={{ fontSize: 32 }}>Bienvenido a la pagina de activos</h1>
          <Modal collectionName={collectionName} labelButton="Crear" item={{}} />
 
          {data?.length > 0 ? (

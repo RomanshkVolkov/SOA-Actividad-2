@@ -37,7 +37,7 @@ const collections: ICollections = {
       getItems: async () => await active.getActives(),
       createItem: async (data: any) => await active.createActive(data),
       updateItem: async (data: any) => await active.updateActive(data),
-      deleteItem: async (id: number) => {},
+      deleteItem: async (id: number) => await active.deleteActive(id),
       validate: (data: any) =>
          data.Nombre &&
          data['Descripción'] &&
