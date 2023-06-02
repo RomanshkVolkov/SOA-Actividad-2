@@ -1,8 +1,8 @@
+'use client';
 import React from 'react';
 import crudsCollections from '@/utils/CrudsCollections';
 import Modal from '../components/Modal';
 import { Table } from '../components/Table';
-import employee from '@/api/employee';
 
 const collectionName = 'actives';
 const collection = crudsCollections[collectionName];

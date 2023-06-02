@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Table } from '../components/Table';
 import { InferGetServerSidePropsType } from 'next';
@@ -28,9 +29,7 @@ export default async function Employes({
       }) || [];
    return (
       <div>
-         <h1 style={{fontSize: 32}}>
-            Bienvenido a la pagina de empleados
-         </h1>
+         <h1 style={{ fontSize: 32 }}>Bienvenido a la pagina de empleados</h1>
          <Modal collectionName={collectionName} labelButton="Crear" item={{}} />
 
          {data?.length > 0 ? (
