@@ -6,8 +6,9 @@
 - Base de datos (HOST Servidor externo).
 
 # Diagrama de base de datos.
-[Diagrama SOA DB](![Uploading image.png…]()
-)
+![Diagrama DB.](https://github.com/RomanshkVolkov/SOA-Actividad-2/assets/85083888/67eadc1e-21cc-4de8-be8e-45c71c74c770)
+
+
 
 # Equipo
 
