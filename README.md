@@ -5,6 +5,10 @@
 - [Aplicacion Backend con conexion a la base de datos .NET 6 (APP SERVICE AZURE).](https://apisoa.azurewebsites.net/empleados)
 - Base de datos (HOST Servidor externo).
 
+# Diagrama de base de datos.
+[Diagrama SOA DB](![Uploading image.png…]()
+)
+
 # Equipo
 
 - [Jose Guzman](https://github.com/RomanshkVolkov/) 
