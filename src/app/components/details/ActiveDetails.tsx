@@ -54,7 +54,7 @@ export default function ActiveDetails(props: Props) {
    return (
       <React.Fragment>
          <div className="flex justify-center flex-col w-full">
-            <h2>Detalles del empleado</h2>
+            <h1 className="w-full text-center mb-4">Detalles del activo</h1>
             <div className="mt-2" />
             <div className="flex flex-col">
                <ItemInput
