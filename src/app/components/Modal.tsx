@@ -24,26 +24,26 @@ export default function Modal(props: Props) {
    const handleCreate = async () => {
       if (validateItem(selectedItem)) {
          const close = await crudsCollections[collectionName]?.createItem(selectedItem);
-         if (close){
- setShowModal(false);
- 
-         window.location.reload();
+         if (close) {
+            setShowModal(false);
+
+            window.location.reload();
          }
       }
    };
 
    const handleUpdate = async () => {
-      console.log(selectedItem)
-         const close = await crudsCollections[collectionName]?.updateItem(selectedItem);
-         console.log(close)
-         if (close){
-setShowModal(false);
+      console.log(selectedItem);
+      const close = await crudsCollections[collectionName]?.updateItem(selectedItem);
+      console.log(close);
+      if (close) {
+         setShowModal(false);
          window.location.reload();
-         } 
+      }
    };
 
    const handleOnUpdateValue = (value: any, attribute: string) => {
-      setSelectedItem({ ...selectedItem, [attribute]: value });
+      setSelectedItem((prevItem: any) => ({ ...prevItem, [attribute]: value }));
    };
 
    return (

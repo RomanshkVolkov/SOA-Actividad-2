@@ -23,19 +23,27 @@ export default function ActiveDetails(props: Props) {
       (async () => {
          setEmployees(await employee.getEmployeesActives());
          onEditValue(false, 'IsAsignable');
-         setActivesEmployes(await employee.getEmployesByActive());
-         console.log(activesEmployes);
+         const activesDetailsAsign = await employee.getEmployesByActive();
+         setActivesEmployes(activesDetailsAsign);
       })();
    }, []);
-
+   console.log(item);
    useEffect(() => {
-      if (!item['IsAsignable']) {
+      if (!item['IsAsignable'] && item.Estado === 'Disponible') {
          onEditValue(null, 'employeeId');
          onEditValue(null, 'assignmentDate');
          onEditValue(null, 'deadLine');
          onEditValue(null, 'releaseDate');
       }
    }, [item['IsAsignable']]);
+
+   useEffect(() => {
+         if (activesEmployes && activesEmployes.length > 0) {
+            onEditValue(activesEmployes[0].id, 'employeeId');
+            onEditValue(activesEmployes[0]['fechaAsignacion'], 'assignmentDate');
+            onEditValue(activesEmployes[0]['fechaEntrega'], 'deadLine');
+         }
+   }, [activesEmployes]);
 
    const findEmployee = (id: number) => employees.find((e) => e.id === id);
 
@@ -100,20 +108,14 @@ export default function ActiveDetails(props: Props) {
                      <ItemDate
                         label="Fecha de asignación"
                         onEditValue={onEditValue}
-                        value={
-                           findEmployeeActives(item['No. Activo'], 'fechaAsignacion') ||
-                           item['assignmentDate']
-                        }
+                        value={item['assignmentDate']}
                         attribute="assignmentDate"
                         disabled={!item['IsAsignable']}
                      />
                      <ItemDate
                         label="Fecha de entrega"
                         onEditValue={onEditValue}
-                        value={
-                           findEmployeeActives(item['No. Activo'], 'fechaEntrega') ||
-                           item['deadLine']
-                        }
+                        value={item['deadLine']}
                         attribute="deadLine"
                         disabled={!item['IsAsignable']}
                      />

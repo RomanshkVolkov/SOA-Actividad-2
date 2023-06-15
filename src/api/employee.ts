@@ -1,60 +1,141 @@
 import axios from 'axios';
 import urls from '../utils/urls';
+import xml2json from '@/utils/xml2json';
 
 const employee = {
-   getEmployees: async () =>
-      await axios
-         .get(`${urls.BASE_URL}/empleados`)
-         .then((res) => res.data)
-         .catch((err) => console.log(err)),
+   getEmployees: async () => {
+      const data = `<?xml version="1.0" encoding="utf-8"?>
+   <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+      <soap:Body>
+         <GetDataPersons xmlns="http://tempuri.org/"/>
+      </soap:Body>
+   </soap:Envelope>`;
 
-   getEmployeesActives: async () =>
-      await axios
-         .get(`${urls.BASE_URL}/empleados/activos`)
-         .then((res) => res.data)
-         .catch((err) => console.log(err)),
-
-   getEmployesByActive: async () =>
-      await axios
-         .get(`${urls.BASE_URL}/activos/empleados`)
-         .then((res) => res.data)
-         .catch((err) => console.log(err)),
-
-   createEmployee: async (data: any) =>
-      await axios
-         .post(`${urls.BASE_URL}/persona`, {
-            name: data.Nombre,
-            lastname: data.Apellidos,
-            curp: data.CURP,
-            birthdate: data['Fecha de nacimiento'],
-            numEmployee: data['No. Empleado'],
-            email: data.Correo,
-            password: 'password',
-            status: data.Estado || true,
+      return (await axios
+         .post(`${urls.BASE_URL}`, data, {
+            headers: {
+               'Content-Type': 'text/xml; charset=utf-8',
+               SOAPAction: 'http://tempuri.org/IService/GetDataPersons',
+            },
+            maxContentLength: Infinity,
          })
-         .then((res) => res.data)
-         .catch((err) => console.log(err)),
+         .then((res) => xml2json(res.data, 'GetDataPersonsResult'))
+         .catch((err) => {
+            console.log(err);
+            return [];
+         })) as any[];
+   },
 
-   updateEmployee: async (data: any) =>
-      await axios
-         .patch(`${urls.BASE_URL}/persona`, {
-            id: data.id,
-            name: data.Nombre,
-            lastname: data.Apellidos,
-            curp: data.CURP,
-            birthdate: data['Fecha de nacimiento'],
-            numEmployee: data['No. Empleado'],
-            email: data.Correo,
-            status: data.Estado === 'Activo' || data.Estado === true ? true : false,
+   getEmployeesActives: async () => {
+      const data = `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <GetActiveEmployees xmlns="http://tempuri.org/"/>
+        </soap:Body>
+      </soap:Envelope>`;
+      return await axios
+         .post(`${urls.BASE_URL}`, data, {
+            headers: {
+               'Content-Type': 'text/xml; charset=utf-8',
+               SOAPAction: 'http://tempuri.org/IService/GetActiveEmployees',
+            },
          })
-         .then((res) => res.data)
-         .catch((err) => console.log(err)),
+         .then((res) => xml2json(res.data, 'GetActiveEmployeesResult'))
+         .catch((err) => console.log(err));
+   },
 
-   deleteEmployee: async (id: number) =>
-      await axios
-         .delete(`${urls.BASE_URL}/persona?id=${id}`)
-         .then((res) => res.data)
-         .catch((err) => console.log(err)),
+   getEmployesByActive: async () => {
+      const data = `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <GetEmployeByActive xmlns="http://tempuri.org/"/>
+        </soap:Body>
+      </soap:Envelope>      
+      `;
+      return await axios
+         .post(`${urls.BASE_URL}`, data, {
+            headers: {
+               'Content-Type': 'text/xml; charset=utf-8',
+               SOAPAction: 'http://tempuri.org/IService/GetEmployeByActive',
+            },
+         })
+         .then((res) => xml2json(res.data, 'GetEmployeByActiveResult'))
+         .catch((err) => []);
+   },
+
+   createEmployee: async (dataJSON: any) => {
+      const data = `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <CreatePerson xmlns="http://tempuri.org/">
+            <name>${dataJSON.Nombre}</name>
+            <lastname>${dataJSON.Apellidos}</lastname>
+            <curp>${dataJSON.CURP}</curp>
+            <birthdate>${dataJSON['Fecha de nacimiento']}</birthdate>
+            <numEmployee>${dataJSON['No. Empleado']}</numEmployee>
+            <email>${dataJSON.Correo}</email>
+          </CreatePerson>
+        </soap:Body>
+      </soap:Envelope>`;
+      return await axios
+         .post(`${urls.BASE_URL}`, data, {
+            headers: {
+               'Content-Type': 'text/xml; charset=utf-8',
+               SOAPAction: 'http://tempuri.org/IService/CreatePerson',
+            },
+         })
+         .then((res) => xml2json(res.data, 'CreatePersonResult'))
+         .catch((err) => console.log(err));
+   },
+
+   updateEmployee: async (dataJSON: any) => {
+      const data = `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <UpdatePerson xmlns="http://tempuri.org/">
+            <id>${dataJSON.Id}</id>
+            <name>${dataJSON.Nombre}</name>
+            <lastname>${dataJSON.Apellidos}</lastname>
+            <birthdate>${dataJSON['Fecha de nacimiento']}</birthdate>
+            <curp>${dataJSON.CURP}</curp>
+            <email>${dataJSON.Correo}</email>
+            <status>${
+               dataJSON.Estado === 'Activo' || dataJSON.Estado === true ? true : false
+            }</status>
+          </UpdatePerson>
+        </soap:Body>
+      </soap:Envelope>`;
+      return await axios
+         .post(`${urls.BASE_URL}`, data, {
+            headers: {
+               'Content-Type': 'text/xml; charset=utf-8',
+               SOAPAction: 'http://tempuri.org/IService/UpdatePerson',
+            },
+         })
+         .then((res) => xml2json(res.data, 'UpdatePersonResult'))
+         .catch((err) => console.log(err));
+   },
+
+   deleteEmployee: async (id: number) => {
+      console.log(id);
+      const data = `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <DeletePerson xmlns="http://tempuri.org/">
+            <id>${id}</id>
+          </DeletePerson>
+        </soap:Body>
+      </soap:Envelope>`;
+      return await axios
+         .post(`${urls.BASE_URL}`, data, {
+            headers: {
+               'Content-Type': 'text/xml; charset=utf-8',
+               SOAPAction: 'http://tempuri.org/IService/DeletePerson',
+            },
+         })
+         .then((res) => xml2json(res.data, 'DeletePersonResult'))
+         .catch((err) => false);
+   },
 };
 
 export default employee;
