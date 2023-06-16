@@ -35,7 +35,6 @@ export default async function Actives() {
       <div className="mt-3 border-gray-300 d-flex justify-center w-full">
          <h1 style={{ fontSize: 32 }}>Bienvenido a la pagina de activos</h1>
          <Modal collectionName={collectionName} labelButton="Crear" item={{}} />
-
          {data?.length > 0 ? (
             <div className="mt-3">
                <Table

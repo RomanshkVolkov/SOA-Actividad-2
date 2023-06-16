@@ -12,6 +12,7 @@ interface ICollections {
       updateItem: (data: any) => Promise<any>;
       deleteItem: (id: number) => Promise<any>;
       validate: (data: any) => boolean;
+      sendEmail: () => Promise<any>;
    };
 }
 
@@ -30,6 +31,7 @@ const collections: ICollections = {
          data.Correo &&
          data.CURP &&
          data.Estado,
+      sendEmail: async () => Promise.resolve(),
    },
    actives: {
       collectionName: 'actives',
@@ -44,6 +46,7 @@ const collections: ICollections = {
          (data.IsAsignable
             ? data.employeeId && data.assignmentDate && data.deadline
             : true),
+      sendEmail: async () => await active.sendRememberEmails(),
    },
 };
 

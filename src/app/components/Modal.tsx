@@ -15,6 +15,8 @@ export default function Modal(props: Props) {
    const [showModal, setShowModal] = useState(false);
    const [selectedItem, setSelectedItem] = useState(item);
 
+   const [loadingSendNotification, setLoadingSendNotification] = useState(false);
+
    useEffect(() => {
       setSelectedItem(item);
    }, [showModal]);
@@ -95,6 +97,36 @@ export default function Modal(props: Props) {
                   </button>
                </div>
             </div>
+         )}
+         {labelButton === 'Crear' && collectionName === 'actives' && (
+            <button
+               className="mr-2"
+               style={{
+                  backgroundColor: '#33658A',
+                  padding: '1vh 4vw',
+                  textAlign: 'center',
+                  borderRadius: '8px',
+                  marginTop: '3vh',
+                  color: '#FDFDFD',
+               }}
+               onClick={async () => {
+                  setLoadingSendNotification((_) => true);
+                  await crudsCollections[collectionName]?.sendEmail();
+                  setLoadingSendNotification((_) => false);
+               }}
+               disabled={loadingSendNotification}>
+               {loadingSendNotification ? (
+                  <div
+                     className={
+                        loadingSendNotification
+                           ? 'animate-spin rounded-full h-2 w-2 border-t-2 border-b-2 border-gray-900'
+                           : ''
+                     }
+                  />
+               ) : (
+                  'Enviar recordatorios'
+               )}
+            </button>
          )}
          <button
             onClick={() => setShowModal(!showModal)}

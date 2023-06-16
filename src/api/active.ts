@@ -94,6 +94,23 @@ const active = {
          .then((res) => xml2json(res.data, 'DeleteActiveResult'))
          .catch((err) => console.log(err));
    },
+   sendRememberEmails: async () => {
+      const data = `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <sendEmailsRemembers xmlns="http://tempuri.org/"/>
+        </soap:Body>
+      </soap:Envelope>`;
+      return await axios
+         .post(`${urls.BASE_URL}`, data, {
+            headers: {
+               'Content-Type': 'text/xml; charset=utf-8',
+               SOAPAction: 'http://tempuri.org/IService/sendEmailsRemembers',
+            },
+         })
+         .then((res) => true)
+         .catch((err) => console.log(err));
+   },
 };
 
 export default active;
