@@ -37,8 +37,15 @@ export const FormComponent = (props: Props) => {
             <button
                type="submit"
                className="button mt-20 mb-3"
-               style={{ background: '#F2BED1' }}
-               value={'Iniciar sesión'}>
+               value={'Iniciar sesión'}
+               style={{
+                  backgroundColor: '#33658A',
+                  padding: '1vh 4vw',
+                  textAlign: 'center',
+                  borderRadius: '8px',
+                  marginTop: '3vh',
+                  color: '#FDFDFD',
+               }}>
                {loading ? <i className="fas fa-spinner fa-spin"></i> : 'Iniciar sesión'}
             </button>
          </form>
