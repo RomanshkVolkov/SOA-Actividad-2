@@ -3,6 +3,26 @@ import urls from '../utils/urls';
 import xml2json from '@/utils/xml2json';
 
 const employee = {
+   login: async (dataJSON: any) => {
+      const data = `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <login xmlns="http://tempuri.org/">
+            <email>${dataJSON.email}</email>
+            <password>${dataJSON.password}</password>
+          </login>
+        </soap:Body>
+      </soap:Envelope>`;
+      return await axios
+         .post(`${urls.BASE_URL}`, data, {
+            headers: {
+               'Content-Type': 'text/xml; charset=utf-8',
+               SOAPAction: 'http://tempuri.org/IService/login',
+            },
+         })
+         .then((res) => xml2json(res.data, 'loginResult'))
+         .catch((err) => console.log(err));
+   },
    getEmployees: async () => {
       const data = `<?xml version="1.0" encoding="utf-8"?>
    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
